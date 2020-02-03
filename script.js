@@ -1,8 +1,9 @@
 {
-    const handle = document.getElementById("handle");
+    //const handle = document.getElementById("handle");
     const container = document.getElementById("container");
-    const barL = document.getElementById("barL");
-    const barR = document.getElementById("barR");
+    let divHandle = 0;
+    //const barL = document.getElementById("barL");
+    //const barR = document.getElementById("barR");
 
     const pValue = document.getElementById("value");
 
@@ -14,10 +15,12 @@
     let xOffset = 0;
     let yOffset = 0;
 
+    makeDivs();
+
     const style = getComputedStyle(container)
     width = parseFloat(style.width);
     xOffset = width / 2;
-    const handleWidth = parseFloat( getComputedStyle(handle).width );
+    const handleWidth = parseFloat( getComputedStyle(divHandle).width );
     console.log(handleWidth)
 
     console.log(style.width)
@@ -29,6 +32,8 @@
     handle.addEventListener("mousedown", dragStart, false);
     container.addEventListener("mouseup", dragEnd, false);
     container.addEventListener("mousemove", drag, false);
+
+    
 
     function dragStart(e) {
       if (e.type === "touchstart") {
@@ -86,5 +91,17 @@
 
       pValue.innerHTML = `${barPos.toFixed(2)}%`;
       
+    }
+
+    function makeDivs() {
+      divHandle = document.createElement("div");
+      divHandle.id = "handle";
+      const divBarL = document.createElement("div");
+      divBarL.id = "barL"
+      const divBarR = document.createElement("div");
+      divBarR.id = "barR";
+      container.append(divHandle);
+      container.append(divBarL);
+      container.append(divBarR);
     }
 }
