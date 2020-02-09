@@ -1,74 +1,84 @@
-{
-    const container = document.getElementById("container");
-    let divHandle;
-    let handleWidth = 0;
-    let sliderWidth = 0;
-    let divBarL;
-    let divBarR;
-    const pValue = document.getElementById("value");
-    let active = false;
-    let currentX = 0;
-    let initialX = 0;
-    makeDivs();
-    handleToCentre();
+class SimpleSlider extends EventTarget {
+    constructor() {
+        super();
+        this.handleWidth = 0;
+        this.sliderWidth = 0;
+        this.active = false;
+        this.currentX = 0;
+        this.initialX = 0;
+        this.value = 0;
+        this.makeDivs();
+        this.handleToCentre();
+        //this.divHandle.addEventListener("mousedown", this.dragStart, false);
+        this.divHandle.addEventListener("mousedown", (e) => {
+            this.dragStart(e);
+        });
+        this.container.addEventListener("mousemove", (e) => {
+            this.drag(e);
+        });
+        this.container.addEventListener("mouseup", (e) => {
+            this.dragEnd(e);
+        });
+        this.container.addEventListener("mouseleave", (e) => {
+            this.dragEnd(e);
+        });
+    }
     //container.addEventListener("touchstart", dragStart, false);
     //container.addEventListener("touchend", dragEnd, false);
     //container.addEventListener("touchmove", drag, false);
-    divHandle.addEventListener("mousedown", dragStart, false);
-    container.addEventListener("mousemove", drag, false);
-    container.addEventListener("mouseup", dragEnd, false);
-    container.addEventListener("mouseleave", dragEnd);
-    function dragStart(e) {
-        init();
+    dragStart(e) {
+        //SimpleSlider.init();
         //initialX = e.touches[0].clientX - xOffset;
         //initialY = e.touches[0].clientY - yOffset;
-        initialX = e.clientX - parseFloat(getComputedStyle(divHandle).left) - handleWidth / 2;
-        console.log(initialX);
-        active = true;
+        this.initialX = e.clientX - parseFloat(getComputedStyle(this.divHandle).left) - this.handleWidth / 2;
+        this.active = true;
     }
-    function drag(e) {
-        if (active) {
+    drag(e) {
+        if (this.active) {
             e.preventDefault();
             //currentX = e.touches[0].clientX - initialX;
             //currentY = e.touches[0].clientY - initialY;
-            currentX = e.clientX - initialX;
-            setTranslate(currentX);
+            this.currentX = e.clientX - this.initialX;
+            this.setTranslate(this.currentX);
             //console.log(e.clientX, e.clientY);
         }
     }
-    function dragEnd(e) {
-        active = false;
+    dragEnd(e) {
+        this.active = false;
+        this.dispatchEvent(new CustomEvent('rel', { detail: 10 }));
     }
-    function setTranslate(xPos) {
-        const handlePos = 100 * (xPos - handleWidth / 2) / (sliderWidth);
-        const barPos = 100 * (xPos) / (sliderWidth);
-        divHandle.style.left = handlePos.toString() + "%";
-        divBarL.style.width = barPos.toString() + "%";
-        divBarR.style.width = (100 - barPos).toString() + "%";
-        pValue.innerHTML = `${barPos.toFixed(2)}%`;
+    setTranslate(xPos) {
+        const handlePos = 100 * (xPos - this.handleWidth / 2) / (this.sliderWidth);
+        const barPos = 100 * (xPos) / (this.sliderWidth);
+        this.divHandle.style.left = handlePos.toString() + "%";
+        this.divBarL.style.width = barPos.toString() + "%";
+        this.divBarR.style.width = (100 - barPos).toString() + "%";
+        this.value = barPos;
         //divHandle.style.left = `${95}%`;
     }
-    function makeDivs() {
-        divHandle = document.createElement("div");
-        divHandle.id = "handle";
-        divBarL = document.createElement("div");
-        divBarL.id = "barL";
-        divBarR = document.createElement("div");
-        divBarR.id = "barR";
-        container.append(divHandle);
-        container.append(divBarL);
-        container.append(divBarR);
+    makeDivs() {
+        this.container = document.getElementById("container");
+        console.log("👱‍♂️");
+        this.divHandle = document.createElement("div");
+        this.divHandle.id = "handle";
+        this.divBarL = document.createElement("div");
+        this.divBarL.id = "barL";
+        this.divBarR = document.createElement("div");
+        this.divBarR.id = "barR";
+        this.container.append(this.divHandle);
+        this.container.append(this.divBarL);
+        this.container.append(this.divBarR);
     }
-    function init() {
-        const style = getComputedStyle(container);
-        sliderWidth = parseFloat(style.width);
-        handleWidth = parseFloat(getComputedStyle(divHandle).width);
+    init() {
+        const style = getComputedStyle(this.container);
+        this.sliderWidth = parseFloat(style.width);
+        this.handleWidth = parseFloat(getComputedStyle(this.divHandle).width);
     }
-    function handleToCentre() {
-        init();
-        const handlePos = 50 - (100 * 0.5 * handleWidth / sliderWidth);
+    handleToCentre() {
+        this.init();
+        const handlePos = 50 - (100 * 0.5 * this.handleWidth / this.sliderWidth);
         //const handlePos = 0;
-        divHandle.style.left = handlePos.toString() + "%";
+        this.divHandle.style.left = handlePos.toString() + "%";
     }
 }
 //# sourceMappingURL=slider.js.map

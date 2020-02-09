@@ -48,7 +48,7 @@ body {
   user-select: none;
   position: absolute;
   left: 50%;
-  z-index: 0;
+  z-index: 1;
 }
 #item:active {
   background-color: rgba(168, 218, 220, 1.00);

@@ -1,21 +1,42 @@
-{
-    const container = document.getElementById("container");
-    let divHandle: HTMLDivElement;
-    let handleWidth = 0;
-    let sliderWidth = 0;
+class SimpleSlider extends EventTarget {
+    
+    private container : HTMLDivElement;
+    private divHandle: HTMLDivElement;
+    private handleWidth = 0;
+    private sliderWidth = 0;
 
-    let divBarL: HTMLDivElement;
-    let divBarR: HTMLDivElement;
+    private divBarL: HTMLDivElement;
+    private divBarR: HTMLDivElement;
 
-    const pValue = document.getElementById("value");
+    private active = false;
+    private currentX = 0;
+    private initialX = 0;
 
-    let active = false;
-    let currentX = 0;
-    let initialX = 0;
+    public value = 0;
 
 
-    makeDivs();
-    handleToCentre();
+    constructor() {
+        super();
+
+        this.makeDivs();
+        this.handleToCentre();
+
+        //this.divHandle.addEventListener("mousedown", this.dragStart, false);
+        this.divHandle.addEventListener("mousedown", (e)=> {
+            this.dragStart(e);
+        });
+        this.container.addEventListener("mousemove", (e) => {
+            this.drag(e);
+        });
+        this.container.addEventListener("mouseup", (e) => {
+            this.dragEnd(e);
+        });
+        this.container.addEventListener("mouseleave", (e) => {
+            this.dragEnd(e);
+        });
+    }
+
+    
 
     
 
@@ -23,93 +44,91 @@
     //container.addEventListener("touchend", dragEnd, false);
     //container.addEventListener("touchmove", drag, false);
 
-    divHandle.addEventListener("mousedown", dragStart, false);
-    container.addEventListener("mousemove", drag, false);
-    container.addEventListener("mouseup", dragEnd, false);
-    container.addEventListener("mouseleave", dragEnd);
+    
     
 
     
 
-    function dragStart(e: MouseEvent) {
-        init();
-        
-
-
+    private dragStart(e: MouseEvent) {
+        //SimpleSlider.init();
         //initialX = e.touches[0].clientX - xOffset;
         //initialY = e.touches[0].clientY - yOffset;
 
-        initialX = e.clientX - parseFloat( getComputedStyle(divHandle).left ) - handleWidth / 2;
+        this.initialX = e.clientX - parseFloat( getComputedStyle(this.divHandle).left ) - this.handleWidth / 2;
 
-
-        console.log(initialX);
-
-        active = true;
+        this.active = true;
 
     }
 
-    function drag(e: MouseEvent) {
-        if (active) {
+    private drag(e: MouseEvent) {
+        if (this.active) {
         
             e.preventDefault();
             
             //currentX = e.touches[0].clientX - initialX;
             //currentY = e.touches[0].clientY - initialY;
 
-            currentX = e.clientX - initialX;
+            this.currentX = e.clientX - this.initialX;
 
-            setTranslate(currentX);
+            this.setTranslate(this.currentX);
             //console.log(e.clientX, e.clientY);
         
         }
     }
 
-    function dragEnd(e: MouseEvent) {
+    private dragEnd(e: MouseEvent) {
 
-        active = false;
+        this.active = false;
+        this.dispatchEvent(new CustomEvent('rel', { detail: 10 }));
     }
 
     
 
-    function setTranslate(xPos: number) {
+    private setTranslate(xPos: number) {
       
-        const handlePos = 100 * (xPos - handleWidth/2) / (sliderWidth);
-        const barPos = 100 * (xPos) / (sliderWidth);
-        divHandle.style.left = handlePos.toString() + "%";
+        const handlePos = 100 * (xPos - this.handleWidth/2) / (this.sliderWidth);
+        const barPos = 100 * (xPos) / (this.sliderWidth);
+        this.divHandle.style.left = handlePos.toString() + "%";
         
-        divBarL.style.width = barPos.toString() + "%";
-        divBarR.style.width = (100 - barPos).toString() + "%";
+        this.divBarL.style.width = barPos.toString() + "%";
+        this.divBarR.style.width = (100 - barPos).toString() + "%";
 
-        pValue.innerHTML = `${barPos.toFixed(2)}%`;
+        this.value = barPos;
+
         //divHandle.style.left = `${95}%`;
       
     }
 
-    function makeDivs() {
-        divHandle = document.createElement("div");
-        divHandle.id = "handle";
-        divBarL = document.createElement("div");
-        divBarL.id = "barL"
-        divBarR = document.createElement("div");
-        divBarR.id = "barR";
+    private makeDivs() {
+        this.container = document.getElementById("container") as HTMLDivElement;
+        console.log("👱‍♂️");
+        
+        this.divHandle = document.createElement("div");
+        this.divHandle.id = "handle";
+        this.divBarL = document.createElement("div");
+        this.divBarL.id = "barL"
+        this.divBarR = document.createElement("div");
+        this.divBarR.id = "barR";
 
-        container.append(divHandle);
-        container.append(divBarL);
-        container.append(divBarR);
+        this.container.append(this.divHandle);
+        this.container.append(this.divBarL);
+        this.container.append(this.divBarR);
 
     }
 
-    function init() {
-        const style = getComputedStyle(container)
-        sliderWidth = parseFloat(style.width);
-        handleWidth = parseFloat( getComputedStyle(divHandle).width );
+    private init() {
+        const style = getComputedStyle(this.container)
+        this.sliderWidth = parseFloat(style.width);
+        this.handleWidth = parseFloat( getComputedStyle(this.divHandle).width );
     }
 
-    function handleToCentre() {
-        init();
+    private handleToCentre() {
+        this.init();
 
-        const handlePos = 50 - (100*0.5*handleWidth/sliderWidth);
+        const handlePos = 50 - (100*0.5*this.handleWidth/this.sliderWidth);
         //const handlePos = 0;
-        divHandle.style.left = handlePos.toString() + "%";
+        this.divHandle.style.left = handlePos.toString() + "%";
     }
+
+
 }
