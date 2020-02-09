@@ -1,0 +1,30 @@
+{
+  "name": "simple-slider",
+  "version": "0.0.1",
+  "description": "A simple cross-paltform slider",
+  "main": "script.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danchitnis/simple-slider.git"
+  },
+  "keywords": [
+    "slider",
+    "html",
+    "javascript"
+  ],
+  "author": "Danial Chitnis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danchitnis/simple-slider/issues"
+  },
+  "homepage": "https://github.com/danchitnis/simple-slider#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "eslint": "^6.8.0",
+    "typescript": "^3.7.5"
+  }
+}
