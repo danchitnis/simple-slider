@@ -1,8 +1,9 @@
 {
-  "name": "simple-slider",
+  "name": "@danchitnis/simple-slider",
   "version": "0.0.1",
-  "description": "A simple cross-paltform slider",
-  "main": "script.js",
+  "description": "A simple cross-platform slider",
+  "main": "./dist/slider.js",
+  "typings": "./src/slider",
   "scripts": {
     "build": "tsc"
   },
