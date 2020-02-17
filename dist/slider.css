@@ -9,7 +9,7 @@
     border-radius: 7px;
     touch-action: none;
     border: solid red;
-    border-width: 1px;
+    border-width: 0px;
     position: relative;
   }
   

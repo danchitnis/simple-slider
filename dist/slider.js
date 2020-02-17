@@ -1,4 +1,4 @@
-class SimpleSlider extends EventTarget {
+export class SimpleSlider extends EventTarget {
     constructor(div, min, max, step) {
         super();
         this.sliderWidth = 0;

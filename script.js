@@ -1,7 +1,7 @@
 {
   const pValue = document.getElementById("value");
 
-  const slider = new SimpleSlider("slider", 0, 100, 0);
+  const slider = new SimpleSlider.SimpleSlider("slider", 0, 100, 0);
   console.log(slider);
 
   slider.addEventListener("update", (e) => {

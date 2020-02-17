@@ -1,4 +1,4 @@
-class SimpleSlider extends EventTarget {
+export class SimpleSlider extends EventTarget {
     
     private divMain : HTMLDivElement;
     private divHandle: HTMLDivElement;
