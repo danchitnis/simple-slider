@@ -1,0 +1,7 @@
+node_modules
+.vscode
+tsconfig.json
+script.js
+index.html
+rollup.config.js
+style.css
