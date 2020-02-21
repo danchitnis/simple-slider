@@ -46,5 +46,17 @@
   }
   
   .simple-slider-handle:hover {
+    cursor: grab;
+  }
+
+  .simple-slider-handle:active {
+    cursor: grabbing;
+  }
+
+  .simple-slider-barL:hover {
+    cursor: pointer;
+  }
+
+  .simple-slider-barR:hover {
     cursor: pointer;
   }

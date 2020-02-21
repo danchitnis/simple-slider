@@ -5,12 +5,12 @@ A simple slider based on vanilla HTML, CSS and JS with no dependencies.
 # Example
 Initialization
 ```javascript
-const slider = new SimpleSlider("slider");
+const slider = new SimpleSlider("slider", 0, 100, 0);
 ```
 
 handle the update event
 ```javascript
-slider.addEventListener("rel", (e) => {
+slider.addEventListener("drag-move", (e) => {
   pValue.innerHTML = slider.value.toString() + "%";
 });
 ```
@@ -22,7 +22,7 @@ window.addEventListener("resize", () => {
 })
 ```
 
-[JSfiddle Example](https://jsfiddle.net/danchitnis/sLu6rqv2/)
+[JSfiddle Example](https://jsfiddle.net/danchitnis/pfevzy3h)
 
 [CodePen Example](https://codepen.io/danchitnis/pen/ZEGYdav)
 

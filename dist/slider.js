@@ -13,6 +13,7 @@ export class SimpleSlider extends EventTarget {
         this.valueMax = 100;
         this.valueMin = 0;
         this.valueStep = 0;
+        this.handleLeftPos = 0;
         this.valueMax = max;
         this.valueMin = min;
         this.valueStep = step;
@@ -33,6 +34,14 @@ export class SimpleSlider extends EventTarget {
         this.divMain.addEventListener("mouseleave", (e) => {
             this.dragEnd(e);
         });
+        this.divBarL.addEventListener("mousedown", (e) => {
+            const x = e.clientX;
+            this.setTranslate(x - this.handleOffset);
+        });
+        this.divBarR.addEventListener("mousedown", (e) => {
+            const x = e.clientX;
+            this.setTranslate(x - this.handleOffset);
+        });
         this.divHandle.addEventListener("touchstart", (e) => {
             const x = e.touches[0].clientX;
             this.dragStart(x);
@@ -46,7 +55,7 @@ export class SimpleSlider extends EventTarget {
         });
     }
     dragStart(x) {
-        this.initialX = x - parseFloat(getComputedStyle(this.divHandle).left) - this.handleOffset / 2;
+        this.initialX = x - this.handleLeftPos - this.handleOffset / 2;
         this.active = true;
         this.dispatchEvent(new CustomEvent('drag-start'));
     }
@@ -55,7 +64,6 @@ export class SimpleSlider extends EventTarget {
             e.preventDefault();
             this.currentX = x - this.initialX;
             this.setTranslate(this.currentX);
-            this.dispatchEvent(new CustomEvent('drag-move'));
         }
     }
     dragEnd(e) {
@@ -69,11 +77,13 @@ export class SimpleSlider extends EventTarget {
             const handlePos = xPos - this.handleOffset;
             const barPos = xPos;
             this.divHandle.style.left = handlePos.toString() + "px";
+            this.handleLeftPos = handlePos;
             this.divBarL.style.left = this.handleOffset.toString() + "px";
             this.divBarL.style.width = (barPos - this.handleOffset / 2).toString() + "px";
             this.divBarR.style.width = (this.sliderWidth - barPos - this.handleOffset / 2).toString() + "px";
             const innerValue = (barPos - pxMin) / (pxMax - pxMin);
             this.value = (this.valueMax - this.valueMin) * innerValue + this.valueMin;
+            this.dispatchEvent(new CustomEvent("update"));
         }
     }
     makeDivs(mainDiv) {
@@ -97,6 +107,8 @@ export class SimpleSlider extends EventTarget {
         const handleWidth = parseFloat(getComputedStyle(this.divHandle).getPropertyValue("width"));
         const handlePad = parseFloat(getComputedStyle(this.divHandle).getPropertyValue("border-left-width"));
         this.handleOffset = (handleWidth + handlePad) / 2;
+        this.handleLeftPos = parseFloat(getComputedStyle(this.divHandle).left);
+        this.setTranslate(0.5 * this.sliderWidth);
     }
     handleToCentre() {
         this.setTranslate(this.sliderWidth / 2);
@@ -104,6 +116,11 @@ export class SimpleSlider extends EventTarget {
     resize() {
         this.init();
         const newPos = this.value * 0.01 * this.sliderWidth;
+        this.setTranslate(newPos);
+    }
+    setValue(val) {
+        const valRel = (val - this.valueMin) / (this.valueMax - this.valueMin);
+        const newPos = valRel * this.sliderWidth;
         this.setTranslate(newPos);
     }
     addEventListener(eventName, listener) {
