@@ -10,7 +10,7 @@ const slider = new SimpleSlider("slider", 0, 100, 0);
 
 handle the update event
 ```javascript
-slider.addEventListener("drag-move", (e) => {
+slider.addEventListener("update", (e) => {
   pValue.innerHTML = slider.value.toString() + "%";
 });
 ```
