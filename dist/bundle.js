@@ -23,44 +23,44 @@ var SimpleSlider = (function (exports) {
             this.makeDivs(div);
             this.init();
             this.handleToCentre();
-            this.divHandle.addEventListener("mousedown", (e) => {
+            this.divHandle.addEventListener("mousedown", e => {
                 const x = e.clientX;
                 this.dragStart(x);
             });
-            this.divMain.addEventListener("mousemove", (e) => {
+            this.divMain.addEventListener("mousemove", e => {
                 const x = e.clientX;
                 this.drag(e, x);
             });
-            this.divMain.addEventListener("mouseup", (e) => {
+            this.divMain.addEventListener("mouseup", e => {
                 this.dragEnd(e);
             });
-            this.divMain.addEventListener("mouseleave", (e) => {
+            this.divMain.addEventListener("mouseleave", e => {
                 this.dragEnd(e);
             });
-            this.divBarL.addEventListener("mousedown", (e) => {
+            this.divBarL.addEventListener("mousedown", e => {
                 const x = e.clientX;
                 this.setTranslate(x - this.handleOffset);
             });
-            this.divBarR.addEventListener("mousedown", (e) => {
+            this.divBarR.addEventListener("mousedown", e => {
                 const x = e.clientX;
                 this.setTranslate(x - this.handleOffset);
             });
-            this.divHandle.addEventListener("touchstart", (e) => {
+            this.divHandle.addEventListener("touchstart", e => {
                 const x = e.touches[0].clientX;
                 this.dragStart(x);
             });
-            this.divMain.addEventListener("touchmove", (e) => {
+            this.divMain.addEventListener("touchmove", e => {
                 const x = e.touches[0].clientX;
                 this.drag(e, x);
             });
-            this.divMain.addEventListener("touchend", (e) => {
+            this.divMain.addEventListener("touchend", e => {
                 this.dragEnd(e);
             });
         }
         dragStart(x) {
             this.initialX = x - this.handleLeftPos - this.handleOffset / 2;
             this.active = true;
-            this.dispatchEvent(new CustomEvent('drag-start'));
+            this.dispatchEvent(new CustomEvent("drag-start"));
         }
         drag(e, x) {
             if (this.active) {
@@ -71,7 +71,7 @@ var SimpleSlider = (function (exports) {
         }
         dragEnd(e) {
             this.active = false;
-            this.dispatchEvent(new CustomEvent('drag-end'));
+            this.dispatchEvent(new CustomEvent("drag-end"));
         }
         setTranslate(xPos) {
             const pxMin = this.handleOffset;
@@ -82,8 +82,10 @@ var SimpleSlider = (function (exports) {
                 this.divHandle.style.left = handlePos.toString() + "px";
                 this.handleLeftPos = handlePos;
                 this.divBarL.style.left = this.handleOffset.toString() + "px";
-                this.divBarL.style.width = (barPos - this.handleOffset / 2).toString() + "px";
-                this.divBarR.style.width = (this.sliderWidth - barPos - this.handleOffset / 2).toString() + "px";
+                this.divBarL.style.width =
+                    (barPos - this.handleOffset / 2).toString() + "px";
+                this.divBarR.style.width =
+                    (this.sliderWidth - barPos - this.handleOffset / 2).toString() + "px";
                 const innerValue = (barPos - pxMin) / (pxMax - pxMin);
                 this.value = (this.valueMax - this.valueMin) * innerValue + this.valueMin;
                 this.dispatchEvent(new CustomEvent("update"));

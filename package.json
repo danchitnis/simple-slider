@@ -1,9 +1,9 @@
 {
   "name": "@danchitnis/simple-slider",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A simple cross-platform slider",
   "main": "./dist/slider.js",
-  "typings": "./src/slider",
+  "typings": "./src/slider.d.ts",
   "scripts": {
     "build": "tsc && rollup -c"
   },
