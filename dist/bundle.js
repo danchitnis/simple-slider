@@ -113,7 +113,7 @@ var SimpleSlider = (function (exports) {
             const handlePad = parseFloat(getComputedStyle(this.divHandle).getPropertyValue("border-left-width"));
             this.handleOffset = (handleWidth + handlePad) / 2;
             this.handleLeftPos = parseFloat(getComputedStyle(this.divHandle).left);
-            this.setTranslate(0.5 * this.sliderWidth);
+            this.handleToCentre();
         }
         handleToCentre() {
             this.setTranslate(this.sliderWidth / 2);

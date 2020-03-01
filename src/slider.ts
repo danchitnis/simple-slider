@@ -153,8 +153,9 @@ export class SimpleSlider extends EventTarget {
     this.handleOffset = (handleWidth + handlePad) / 2;
 
     this.handleLeftPos = parseFloat(getComputedStyle(this.divHandle).left);
+    
+    this.handleToCentre();
 
-    this.setTranslate(0.5 * this.sliderWidth);
   }
 
   private handleToCentre() {
