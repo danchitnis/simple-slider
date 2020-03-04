@@ -12,7 +12,7 @@ var SimpleSlider = (function (exports) {
             this.active = false;
             this.currentX = 0;
             this.initialX = 0;
-            this.value = 0;
+            this.value = -1;
             this.valueMax = 100;
             this.valueMin = 0;
             this.valueStep = 0;
@@ -37,14 +37,14 @@ var SimpleSlider = (function (exports) {
             this.divMain.addEventListener("mouseleave", e => {
                 this.dragEnd(e);
             });
-            this.divBarL.addEventListener("mousedown", e => {
-                const x = e.clientX;
-                this.setTranslate(x - this.handleOffset);
+            /*this.divBarL.addEventListener("mousedown", e => {
+              const x = e.clientX;
+              this.setTranslate(x - this.handleOffset);
             });
             this.divBarR.addEventListener("mousedown", e => {
-                const x = e.clientX;
-                this.setTranslate(x - this.handleOffset);
-            });
+              const x = e.clientX;
+              this.setTranslate(x - this.handleOffset);
+            });*/
             this.divHandle.addEventListener("touchstart", e => {
                 const x = e.touches[0].clientX;
                 this.dragStart(x);
@@ -66,30 +66,60 @@ var SimpleSlider = (function (exports) {
             if (this.active) {
                 e.preventDefault();
                 this.currentX = x - this.initialX;
-                this.setTranslate(this.currentX);
+                this.value = this.getPositionValue(this.currentX);
+                this.dispatchEvent(new CustomEvent("update"));
             }
         }
         dragEnd(e) {
             this.active = false;
             this.dispatchEvent(new CustomEvent("drag-end"));
         }
-        setTranslate(xPos) {
+        getPositionValue(xPos) {
             const pxMin = this.handleOffset;
             const pxMax = this.sliderWidth - this.handleOffset;
-            if (xPos > pxMin && xPos < pxMax) {
-                const handlePos = xPos - this.handleOffset;
-                const barPos = xPos;
-                this.divHandle.style.left = handlePos.toString() + "px";
-                this.handleLeftPos = handlePos;
-                this.divBarL.style.left = this.handleOffset.toString() + "px";
-                this.divBarL.style.width =
-                    (barPos - this.handleOffset / 2).toString() + "px";
-                this.divBarR.style.width =
-                    (this.sliderWidth - barPos - this.handleOffset / 2).toString() + "px";
-                const innerValue = (barPos - pxMin) / (pxMax - pxMin);
-                this.value = (this.valueMax - this.valueMin) * innerValue + this.valueMin;
-                this.dispatchEvent(new CustomEvent("update"));
+            const step = this.sliderWidth / 10;
+            //const step = 1;
+            //xPos = Math.round(xPos / step) * step;
+            console.log(xPos);
+            switch (true) {
+                case xPos < pxMin: {
+                    xPos = pxMin;
+                }
+                case xPos > pxMax: {
+                    xPos = pxMax;
+                }
+                default: {
+                    //const relPos = 1000xPos / this.sliderWidth;
+                    const handlePos = xPos - this.handleOffset;
+                    //const handlePos = xPos;
+                    const barPos = xPos;
+                    this.divHandle.style.left = handlePos.toString() + "px";
+                    this.handleLeftPos = handlePos;
+                    this.divBarL.style.left = this.handleOffset.toString() + "px";
+                    this.divBarL.style.width =
+                        (barPos - this.handleOffset / 2).toString() + "px";
+                    this.divBarR.style.width =
+                        (this.sliderWidth - barPos - this.handleOffset / 2).toString() + "px";
+                    const innerValue = (barPos - pxMin) / (pxMax - pxMin);
+                    return (this.valueMax - this.valueMin) * innerValue + this.valueMin;
+                }
             }
+        }
+        setPositionValue(val) {
+            const valRel = (val - this.valueMin) / (this.valueMax - this.valueMin);
+            const newPos = valRel * this.sliderWidth;
+            const pxMin = this.handleOffset;
+            const pxMax = this.sliderWidth - this.handleOffset;
+            const handlePos = newPos - this.handleOffset;
+            const barPos = newPos;
+            this.divHandle.style.left = handlePos.toString() + "px";
+            this.handleLeftPos = handlePos;
+            this.divBarL.style.left = this.handleOffset.toString() + "px";
+            this.divBarL.style.width =
+                (barPos - this.handleOffset / 2).toString() + "px";
+            this.divBarR.style.width =
+                (this.sliderWidth - barPos - this.handleOffset / 2).toString() + "px";
+            this.value = val;
         }
         makeDivs(mainDiv) {
             this.divMain = document.getElementById(mainDiv);
@@ -113,20 +143,16 @@ var SimpleSlider = (function (exports) {
             const handlePad = parseFloat(getComputedStyle(this.divHandle).getPropertyValue("border-left-width"));
             this.handleOffset = (handleWidth + handlePad) / 2;
             this.handleLeftPos = parseFloat(getComputedStyle(this.divHandle).left);
-            this.setTranslate(0.5 * this.sliderWidth);
+            if (this.value == -1) {
+                this.handleToCentre();
+            }
         }
         handleToCentre() {
-            this.setTranslate(this.sliderWidth / 2);
+            this.setPositionValue(50);
         }
         resize() {
             this.init();
-            const newPos = this.value * 0.01 * this.sliderWidth;
-            this.setTranslate(newPos);
-        }
-        setValue(val) {
-            const valRel = (val - this.valueMin) / (this.valueMax - this.valueMin);
-            const newPos = valRel * this.sliderWidth;
-            this.setTranslate(newPos);
+            this.setPositionValue(this.value);
         }
         addEventListener(eventName, listener) {
             super.addEventListener(eventName, listener);

@@ -18,7 +18,7 @@ export class SimpleSlider extends EventTarget {
   private currentX = 0;
   private initialX = 0;
 
-  public value = 0;
+  public value = -1;
   public valueMax = 100;
   public valueMin = 0;
   public valueStep = 0;
@@ -50,14 +50,14 @@ export class SimpleSlider extends EventTarget {
       this.dragEnd(e);
     });
 
-    this.divBarL.addEventListener("mousedown", e => {
+    /*this.divBarL.addEventListener("mousedown", e => {
       const x = e.clientX;
       this.setTranslate(x - this.handleOffset);
     });
     this.divBarR.addEventListener("mousedown", e => {
       const x = e.clientX;
       this.setTranslate(x - this.handleOffset);
-    });
+    });*/
 
     this.divHandle.addEventListener("touchstart", e => {
       const x = e.touches[0].clientX;
@@ -85,7 +85,9 @@ export class SimpleSlider extends EventTarget {
       e.preventDefault();
 
       this.currentX = x - this.initialX;
-      this.setTranslate(this.currentX);
+      this.value = this.getPositionValue(this.currentX);
+
+      this.dispatchEvent(new CustomEvent("update"));
     }
   }
 
@@ -94,29 +96,66 @@ export class SimpleSlider extends EventTarget {
     this.dispatchEvent(new CustomEvent("drag-end"));
   }
 
-  private setTranslate(xPos: number) {
+  private getPositionValue(xPos: number): number {
+    const delta = 1;
     const pxMin = this.handleOffset;
     const pxMax = this.sliderWidth - this.handleOffset;
 
-    if (xPos > pxMin && xPos < pxMax) {
-      const handlePos = xPos - this.handleOffset;
-      const barPos = xPos;
+    const step = this.sliderWidth / 10;
+    //const step = 1;
+    //xPos = Math.round(xPos / step) * step;
 
-      this.divHandle.style.left = handlePos.toString() + "px";
-      this.handleLeftPos = handlePos;
+    console.log(xPos);
 
-      this.divBarL.style.left = this.handleOffset.toString() + "px";
-      this.divBarL.style.width =
-        (barPos - this.handleOffset / 2).toString() + "px";
-      this.divBarR.style.width =
-        (this.sliderWidth - barPos - this.handleOffset / 2).toString() + "px";
+    switch (true) {
+      case xPos < pxMin: {
+        xPos = pxMin;
+      }
+      case xPos > pxMax: {
+        xPos = pxMax;
+      }
+      default: {
+        //const relPos = 1000xPos / this.sliderWidth;
 
-      const innerValue = (barPos - pxMin) / (pxMax - pxMin);
+        const handlePos = xPos - this.handleOffset;
+        //const handlePos = xPos;
+        const barPos = xPos;
 
-      this.value = (this.valueMax - this.valueMin) * innerValue + this.valueMin;
+        this.divHandle.style.left = handlePos.toString() + "px";
+        this.handleLeftPos = handlePos;
 
-      this.dispatchEvent(new CustomEvent("update"));
+        this.divBarL.style.left = this.handleOffset.toString() + "px";
+        this.divBarL.style.width =
+          (barPos - this.handleOffset / 2).toString() + "px";
+        this.divBarR.style.width =
+          (this.sliderWidth - barPos - this.handleOffset / 2).toString() + "px";
+
+        const innerValue = (barPos - pxMin) / (pxMax - pxMin);
+        return (this.valueMax - this.valueMin) * innerValue + this.valueMin;
+      }
     }
+  }
+
+  private setPositionValue(val: number) {
+    const valRel = (val - this.valueMin) / (this.valueMax - this.valueMin);
+    const newPos = valRel * this.sliderWidth;
+
+    const pxMin = this.handleOffset;
+    const pxMax = this.sliderWidth - this.handleOffset;
+
+    const handlePos = newPos - this.handleOffset;
+    const barPos = newPos;
+
+    this.divHandle.style.left = handlePos.toString() + "px";
+    this.handleLeftPos = handlePos;
+
+    this.divBarL.style.left = this.handleOffset.toString() + "px";
+    this.divBarL.style.width =
+      (barPos - this.handleOffset / 2).toString() + "px";
+    this.divBarR.style.width =
+      (this.sliderWidth - barPos - this.handleOffset / 2).toString() + "px";
+
+    this.value = val;
   }
 
   private makeDivs(mainDiv: string) {
@@ -154,23 +193,20 @@ export class SimpleSlider extends EventTarget {
 
     this.handleLeftPos = parseFloat(getComputedStyle(this.divHandle).left);
 
-    this.setTranslate(0.5 * this.sliderWidth);
+    if (this.value == -1) {
+      this.handleToCentre();
+    } else {
+      //this.setValue(this.value);
+    }
   }
 
   private handleToCentre() {
-    this.setTranslate(this.sliderWidth / 2);
+    this.setPositionValue(50);
   }
 
   public resize() {
     this.init();
-    const newPos = this.value * 0.01 * this.sliderWidth;
-    this.setTranslate(newPos);
-  }
-
-  public setValue(val: number) {
-    const valRel = (val - this.valueMin) / (this.valueMax - this.valueMin);
-    const newPos = valRel * this.sliderWidth;
-    this.setTranslate(newPos);
+    this.setPositionValue(this.value);
   }
 
   public addEventListener(eventName: eventType, listener: EventListener) {

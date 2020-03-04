@@ -18,12 +18,12 @@ export declare class SimpleSlider extends EventTarget {
     private dragStart;
     private drag;
     private dragEnd;
-    private setTranslate;
+    private getPositionValue;
+    private setPositionValue;
     private makeDivs;
     private init;
     private handleToCentre;
     resize(): void;
-    setValue(val: number): void;
     addEventListener(eventName: eventType, listener: EventListener): void;
 }
 export {};
