@@ -4,6 +4,8 @@ export declare class SimpleSlider extends EventTarget {
     private divHandle;
     private sliderWidth;
     private handleOffset;
+    private pxMin;
+    private pxMax;
     private divBarL;
     private divBarR;
     private active;
@@ -18,8 +20,8 @@ export declare class SimpleSlider extends EventTarget {
     private dragStart;
     private drag;
     private dragEnd;
+    private translate;
     private getPositionValue;
-    private setPositionValue;
     private makeDivs;
     private init;
     private handleToCentre;
