@@ -15,7 +15,7 @@ export declare class SimpleSlider extends EventTarget {
     valueMax: number;
     valueMin: number;
     valueStep: number;
-    private handleLeftPos;
+    private handlePos;
     constructor(div: string, min: number, max: number, step: number);
     private dragStart;
     private drag;

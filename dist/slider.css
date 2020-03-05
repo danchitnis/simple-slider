@@ -18,8 +18,8 @@
   height: 20%;
   background-color: lightskyblue;
   border-radius: 3px;
-  position: relative;
-  z-index: 0;
+  position: absolute;
+  z-index: 1;
 }
 
 .simple-slider-barR {
@@ -27,7 +27,7 @@
   height: 20%;
   background-color: lightgray;
   border-radius: 3px;
-  position: relative;
+  position: absolute;
   z-index: 0;
 }
 
