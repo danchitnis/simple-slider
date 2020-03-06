@@ -80,6 +80,7 @@ var SimpleSlider = (function (exports) {
       translate(xPos) {
           //console.log(xPos);
           let handlePos = xPos - this.handleOffset;
+          //const handlePos = xPos;
           switch (true) {
               case handlePos < this.pxMin: {
                   handlePos = this.pxMin;
@@ -94,7 +95,8 @@ var SimpleSlider = (function (exports) {
                   this.divHandle.style.left =
                       (handlePos - this.handleOffset).toString() + "px";
                   this.handlePos = handlePos;
-                  this.divBarL.style.width = (handlePos - this.handleOffset).toString() + "px";
+                  this.divBarL.style.width =
+                      (handlePos - this.handleOffset).toString() + "px";
               //this.divBarR.style.width =
               //  (this.sliderWidth - handlePos).toString() + "px";
           }
@@ -144,19 +146,20 @@ var SimpleSlider = (function (exports) {
           const divMainWidth = parseFloat(getComputedStyle(this.divMain).getPropertyValue("width"));
           const handleWidth = parseFloat(getComputedStyle(this.divHandle).getPropertyValue("width"));
           const handlePad = parseFloat(getComputedStyle(this.divHandle).getPropertyValue("border-left-width"));
-          this.handleOffset = (handleWidth / 2 + handlePad);
-          this.handlePos = parseFloat(getComputedStyle(this.divHandle).left) + this.handleOffset;
+          this.handleOffset = handleWidth / 2 + handlePad;
+          this.handlePos =
+              parseFloat(getComputedStyle(this.divHandle).left) + this.handleOffset;
           this.divBarL.style.left = this.handleOffset.toString() + "px";
           this.divBarR.style.left = this.handleOffset.toString() + "px";
           this.sliderWidth = divMainWidth - 2 * this.handleOffset;
           //this.divHandle.style.left =
           //  (this.handlePos - this.handleOffset).toString() + "px";
-          this.divBarL.style.width = this.handlePos.toString() + "px";
-          this.divBarR.style.width =
-              (this.sliderWidth - this.handleOffset).toString() + "px";
+          this.divBarL.style.width =
+              (this.handlePos - this.handleOffset).toString() + "px";
+          this.divBarR.style.width = this.sliderWidth.toString() + "px";
           this.pxMin = parseFloat(getComputedStyle(this.divBarL).left);
           this.pxMax = this.pxMin + this.sliderWidth;
-          console.log("pxmin=", this.pxMin);
+          console.log("pxmin=", this.pxMax);
           if (this.value == -1) {
               this.handleToCentre();
           }
