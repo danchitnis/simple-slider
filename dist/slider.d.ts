@@ -23,11 +23,11 @@ export declare class SimpleSlider extends EventTarget {
     private translate;
     private getPositionValue;
     setPositionValue(val: number): void;
-    private makeDivs;
     private init;
     private handleToCentre;
     resize(): void;
     addEventListener(eventName: eventType, listener: EventListener): void;
+    private makeDivs;
 }
 export {};
 //# sourceMappingURL=slider.d.ts.map

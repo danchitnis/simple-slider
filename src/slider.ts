@@ -99,8 +99,14 @@ export class SimpleSlider extends EventTarget {
     this.dispatchEvent(new CustomEvent("drag-end"));
   }
 
+  /*-----------------------------------------------------------*/
+
   private translate(xPos: number): void {
     //console.log(xPos);
+
+    //const step = this.sliderWidth / 11;
+    //const step = 1;
+    //xPos = Math.round(xPos / step) * step;
 
     this.handlePos = xPos - this.handleOffset;
     //const handlePos = xPos;
@@ -132,11 +138,9 @@ export class SimpleSlider extends EventTarget {
   }
 
   private getPositionValue(xPos: number): number {
-    const delta = 1;
-
     //const step = this.sliderWidth / 10;
     //const step = 1;
-    //xPos = Math.round(xPos / step) * step;
+    //this.handlePos = Math.round(this.handlePos / step) * step;
 
     const innerValue = (this.handlePos - this.pxMin) / this.sliderWidth;
     return (this.valueMax - this.valueMin) * innerValue + this.valueMin;
@@ -154,38 +158,6 @@ export class SimpleSlider extends EventTarget {
     this.value = this.getPositionValue(this.handlePos);
 
     this.dispatchEvent(new CustomEvent("update"));
-
-    /*this.divHandle.style.left = handlePos.toString() + "px";
-    this.handleLeftPos = handlePos;
-
-    this.divBarL.style.left = this.handleOffset.toString() + "px";
-    this.divBarL.style.width =
-      (barPos - this.handleOffset / 2).toString() + "px";
-    this.divBarR.style.width =
-      (this.sliderWidth - barPos - this.handleOffset / 2).toString() + "px";
-    */
-    //this.value = val;
-  }
-
-  private makeDivs(mainDiv: string): void {
-    this.divMain = document.getElementById(mainDiv) as HTMLDivElement;
-    this.divMain.className = "simple-slider";
-
-    this.divHandle = document.createElement("div");
-    this.divHandle.id = "handle";
-    this.divHandle.className = "simple-slider-handle";
-
-    this.divBarL = document.createElement("div");
-    this.divBarL.id = "barL";
-    this.divBarL.className = "simple-slider-barL";
-
-    this.divBarR = document.createElement("div");
-    this.divBarR.id = "barR";
-    this.divBarR.className = "simple-slider-barR";
-
-    this.divMain.append(this.divHandle);
-    this.divMain.append(this.divBarL);
-    this.divMain.append(this.divBarR);
   }
 
   private init(): void {
@@ -217,7 +189,6 @@ export class SimpleSlider extends EventTarget {
     this.pxMin = this.handleOffset;
     this.pxMax = this.pxMin + this.sliderWidth;
 
-
     if (this.value == -1) {
       this.handleToCentre();
     } else {
@@ -236,5 +207,26 @@ export class SimpleSlider extends EventTarget {
 
   public addEventListener(eventName: eventType, listener: EventListener): void {
     super.addEventListener(eventName, listener);
+  }
+
+  private makeDivs(mainDiv: string): void {
+    this.divMain = document.getElementById(mainDiv) as HTMLDivElement;
+    this.divMain.className = "simple-slider";
+
+    this.divHandle = document.createElement("div");
+    this.divHandle.id = "handle";
+    this.divHandle.className = "simple-slider-handle";
+
+    this.divBarL = document.createElement("div");
+    this.divBarL.id = "barL";
+    this.divBarL.className = "simple-slider-barL";
+
+    this.divBarR = document.createElement("div");
+    this.divBarR.id = "barR";
+    this.divBarR.className = "simple-slider-barR";
+
+    this.divMain.append(this.divHandle);
+    this.divMain.append(this.divBarL);
+    this.divMain.append(this.divBarR);
   }
 }
