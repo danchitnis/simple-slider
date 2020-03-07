@@ -15,4 +15,9 @@
   window.addEventListener("resize", () => {
     slider.resize();
   });
+
+  const btSet = document.getElementById("btSet");
+  btSet.addEventListener("click", () => {
+    slider.setPositionValue(40);
+  })
 }

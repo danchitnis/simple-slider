@@ -76,16 +76,16 @@ export class SimpleSlider extends EventTarget {
     }
     translate(xPos) {
         //console.log(xPos);
-        let handlePos = xPos - this.handleOffset;
+        this.handlePos = xPos - this.handleOffset;
         //const handlePos = xPos;
         switch (true) {
-            case handlePos < this.pxMin: {
-                handlePos = this.pxMin;
+            case this.handlePos < this.pxMin: {
+                this.handlePos = this.pxMin;
                 console.log("😯");
                 break;
             }
-            case handlePos > this.pxMax: {
-                handlePos = this.pxMax;
+            case this.handlePos > this.pxMax: {
+                this.handlePos = this.pxMax;
                 break;
             }
             default:
@@ -93,10 +93,10 @@ export class SimpleSlider extends EventTarget {
                     //const relPos = 1000xPos / this.sliderWidth;
                 }
                 this.divHandle.style.left =
-                    (handlePos - this.handleOffset).toString() + "px";
-                this.handlePos = handlePos;
+                    (this.handlePos - this.handleOffset).toString() + "px";
+                //this.handlePos = handlePos;
                 this.divBarL.style.width =
-                    (handlePos - this.handleOffset).toString() + "px";
+                    (this.handlePos - this.handleOffset).toString() + "px";
             //this.divBarR.style.width =
             //  (this.sliderWidth - handlePos).toString() + "px";
         }
@@ -106,27 +106,28 @@ export class SimpleSlider extends EventTarget {
         //const step = this.sliderWidth / 10;
         //const step = 1;
         //xPos = Math.round(xPos / step) * step;
-        const innerValue = (xPos - this.pxMin) / (this.pxMax - this.pxMin);
+        const innerValue = (this.handlePos - this.pxMin) / this.sliderWidth;
         return (this.valueMax - this.valueMin) * innerValue + this.valueMin;
     }
-    /*private setPositionValue(val: number) {
-      const valRel = (val - this.valueMin) / (this.valueMax - this.valueMin);
-      const newPos = valRel * this.sliderWidth;
-  
-      const handlePos = newPos - this.handleOffset;
-      const barPos = newPos;
-  
-      this.divHandle.style.left = handlePos.toString() + "px";
-      this.handleLeftPos = handlePos;
-  
-      this.divBarL.style.left = this.handleOffset.toString() + "px";
-      this.divBarL.style.width =
-        (barPos - this.handleOffset / 2).toString() + "px";
-      this.divBarR.style.width =
-        (this.sliderWidth - barPos - this.handleOffset / 2).toString() + "px";
-  
-      this.value = val;
-    }*/
+    setPositionValue(val) {
+        const valRel = (val - this.valueMin) / (this.valueMax - this.valueMin);
+        const newPos = valRel * this.sliderWidth + 2 * this.handleOffset;
+        //const handlePos = newPos - this.handleOffset;
+        //const barPos = newPos;
+        this.translate(newPos);
+        this.value = this.getPositionValue(this.handlePos);
+        this.dispatchEvent(new CustomEvent("update"));
+        /*this.divHandle.style.left = handlePos.toString() + "px";
+        this.handleLeftPos = handlePos;
+    
+        this.divBarL.style.left = this.handleOffset.toString() + "px";
+        this.divBarL.style.width =
+          (barPos - this.handleOffset / 2).toString() + "px";
+        this.divBarR.style.width =
+          (this.sliderWidth - barPos - this.handleOffset / 2).toString() + "px";
+        */
+        //this.value = val;
+    }
     makeDivs(mainDiv) {
         this.divMain = document.getElementById(mainDiv);
         this.divMain.className = "simple-slider";
@@ -158,22 +159,21 @@ export class SimpleSlider extends EventTarget {
         this.divBarL.style.width =
             (this.handlePos - this.handleOffset).toString() + "px";
         this.divBarR.style.width = this.sliderWidth.toString() + "px";
-        this.pxMin = parseFloat(getComputedStyle(this.divBarL).left);
+        this.pxMin = this.handleOffset;
         this.pxMax = this.pxMin + this.sliderWidth;
-        console.log("pxmin=", this.pxMax);
         if (this.value == -1) {
             this.handleToCentre();
         }
         else {
-            //this.setValue(this.value);
+            this.setPositionValue(this.value);
         }
     }
     handleToCentre() {
-        //this.setPositionValue(50);
+        this.setPositionValue(50);
     }
     resize() {
         this.init();
-        //this.setPositionValue(this.value);
+        this.setPositionValue(this.value);
     }
     addEventListener(eventName, listener) {
         super.addEventListener(eventName, listener);
