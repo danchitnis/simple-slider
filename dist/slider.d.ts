@@ -1,9 +1,17 @@
+/**
+ * Simple Slide
+ *
+ * by Danial Chitnis
+ * Feb 2020
+ */
 declare type eventType = "drag-start" | "update" | "drag-end" | "resize";
 export declare class SimpleSlider extends EventTarget {
     private divMain;
     private divHandle;
     private sliderWidth;
     private handleOffset;
+    private pxMin;
+    private pxMax;
     private divBarL;
     private divBarR;
     private active;
@@ -12,19 +20,21 @@ export declare class SimpleSlider extends EventTarget {
     value: number;
     valueMax: number;
     valueMin: number;
-    valueStep: number;
-    private handleLeftPos;
-    constructor(div: string, min: number, max: number, step: number);
+    valueN: number;
+    private handlePos;
+    constructor(div: string, min: number, max: number, n: number);
     private dragStart;
     private drag;
     private dragEnd;
-    private setTranslate;
-    private makeDivs;
+    private translate2;
+    private translate;
+    private getPositionValue;
+    setPositionValue(val: number): void;
     private init;
     private handleToCentre;
     resize(): void;
-    setValue(val: number): void;
     addEventListener(eventName: eventType, listener: EventListener): void;
+    private makeDivs;
 }
 export {};
 //# sourceMappingURL=slider.d.ts.map

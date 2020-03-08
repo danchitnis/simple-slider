@@ -5,3 +5,6 @@ script.js
 index.html
 rollup.config.js
 style.css
+.yarn
+.pnp.js
+.yarnrc.yml
