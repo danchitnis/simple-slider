@@ -1,5 +1,8 @@
-/*
+/**
+ * Simple Slide
  *
+ * by Danial Chitnis
+ * Feb 2020
  */
 
 type eventType = "drag-start" | "update" | "drag-end" | "resize";
@@ -23,15 +26,15 @@ export class SimpleSlider extends EventTarget {
   public value = -1;
   public valueMax = 100;
   public valueMin = 0;
-  public valueStep = 0;
+  public valueN = 0;
 
   private handlePos = 0;
 
-  constructor(div: string, min: number, max: number, step: number) {
+  constructor(div: string, min: number, max: number, n: number) {
     super();
     this.valueMax = max;
     this.valueMin = min;
-    this.valueStep = step;
+    this.valueN = n;
 
     this.makeDivs(div);
     this.init();
@@ -87,7 +90,7 @@ export class SimpleSlider extends EventTarget {
       e.preventDefault();
 
       this.currentX = x - this.initialX;
-      this.translate(this.currentX);
+      this.translate2(this.currentX);
       this.value = this.getPositionValue(this.handlePos);
 
       this.dispatchEvent(new CustomEvent("update"));
@@ -101,12 +104,18 @@ export class SimpleSlider extends EventTarget {
 
   /*-----------------------------------------------------------*/
 
+  private translate2(xPos: number): void {
+    this.translate(xPos);
+    if (this.valueN > 0) {
+      let val = this.getPositionValue(xPos);
+      const step = (this.valueMax - this.valueMin) / this.valueN;
+      val = Math.round(val / step) * step;
+      this.setPositionValue(val);
+    }
+  }
+
   private translate(xPos: number): void {
     //console.log(xPos);
-
-    //const step = this.sliderWidth / 11;
-    //const step = 1;
-    //xPos = Math.round(xPos / step) * step;
 
     this.handlePos = xPos - this.handleOffset;
     //const handlePos = xPos;

@@ -1,11 +1,14 @@
 var SimpleSlider = (function (exports) {
     'use strict';
 
-    /*
+    /**
+     * Simple Slide
      *
+     * by Danial Chitnis
+     * Feb 2020
      */
     class SimpleSlider extends EventTarget {
-        constructor(div, min, max, step) {
+        constructor(div, min, max, n) {
             super();
             this.sliderWidth = 0;
             this.handleOffset = 0;
@@ -17,11 +20,11 @@ var SimpleSlider = (function (exports) {
             this.value = -1;
             this.valueMax = 100;
             this.valueMin = 0;
-            this.valueStep = 0;
+            this.valueN = 0;
             this.handlePos = 0;
             this.valueMax = max;
             this.valueMin = min;
-            this.valueStep = step;
+            this.valueN = n;
             this.makeDivs(div);
             this.init();
             this.handleToCentre();
@@ -68,7 +71,7 @@ var SimpleSlider = (function (exports) {
             if (this.active) {
                 e.preventDefault();
                 this.currentX = x - this.initialX;
-                this.translate(this.currentX);
+                this.translate2(this.currentX);
                 this.value = this.getPositionValue(this.handlePos);
                 this.dispatchEvent(new CustomEvent("update"));
             }
@@ -78,11 +81,17 @@ var SimpleSlider = (function (exports) {
             this.dispatchEvent(new CustomEvent("drag-end"));
         }
         /*-----------------------------------------------------------*/
+        translate2(xPos) {
+            this.translate(xPos);
+            if (this.valueN > 0) {
+                let val = this.getPositionValue(xPos);
+                const step = (this.valueMax - this.valueMin) / this.valueN;
+                val = Math.round(val / step) * step;
+                this.setPositionValue(val);
+            }
+        }
         translate(xPos) {
             //console.log(xPos);
-            //const step = this.sliderWidth / 11;
-            //const step = 1;
-            //xPos = Math.round(xPos / step) * step;
             this.handlePos = xPos - this.handleOffset;
             //const handlePos = xPos;
             switch (true) {

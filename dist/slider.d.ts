@@ -1,3 +1,9 @@
+/**
+ * Simple Slide
+ *
+ * by Danial Chitnis
+ * Feb 2020
+ */
 declare type eventType = "drag-start" | "update" | "drag-end" | "resize";
 export declare class SimpleSlider extends EventTarget {
     private divMain;
@@ -14,12 +20,13 @@ export declare class SimpleSlider extends EventTarget {
     value: number;
     valueMax: number;
     valueMin: number;
-    valueStep: number;
+    valueN: number;
     private handlePos;
-    constructor(div: string, min: number, max: number, step: number);
+    constructor(div: string, min: number, max: number, n: number);
     private dragStart;
     private drag;
     private dragEnd;
+    private translate2;
     private translate;
     private getPositionValue;
     setPositionValue(val: number): void;
