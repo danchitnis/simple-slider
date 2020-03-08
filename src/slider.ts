@@ -55,14 +55,14 @@ export class SimpleSlider extends EventTarget {
       this.dragEnd(e);
     });
 
-    /*this.divBarL.addEventListener("mousedown", e => {
+    this.divBarL.addEventListener("mousedown", e => {
       const x = e.clientX;
-      this.setTranslate(x - this.handleOffset);
+      this.translate2(x);
     });
     this.divBarR.addEventListener("mousedown", e => {
       const x = e.clientX;
-      this.setTranslate(x - this.handleOffset);
-    });*/
+      this.translate2(x);
+    });
 
     this.divHandle.addEventListener("touchstart", e => {
       const x = e.touches[0].clientX;
@@ -91,7 +91,7 @@ export class SimpleSlider extends EventTarget {
 
       this.currentX = x - this.initialX;
       this.translate2(this.currentX);
-      this.value = this.getPositionValue(this.handlePos);
+      this.value = this.getPositionValue();
 
       this.dispatchEvent(new CustomEvent("update"));
     }
@@ -107,7 +107,7 @@ export class SimpleSlider extends EventTarget {
   private translate2(xPos: number): void {
     this.translate(xPos);
     if (this.valueN > 0) {
-      let val = this.getPositionValue(xPos);
+      let val = this.getPositionValue();
       const step = (this.valueMax - this.valueMin) / this.valueN;
       val = Math.round(val / step) * step;
       this.setPositionValue(val);
@@ -146,7 +146,7 @@ export class SimpleSlider extends EventTarget {
     }
   }
 
-  private getPositionValue(xPos: number): number {
+  private getPositionValue(): number {
     //const step = this.sliderWidth / 10;
     //const step = 1;
     //this.handlePos = Math.round(this.handlePos / step) * step;
@@ -164,7 +164,7 @@ export class SimpleSlider extends EventTarget {
 
     this.translate(newPos);
 
-    this.value = this.getPositionValue(this.handlePos);
+    this.value = this.getPositionValue();
 
     this.dispatchEvent(new CustomEvent("update"));
   }

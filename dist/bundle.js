@@ -42,14 +42,14 @@ var SimpleSlider = (function (exports) {
             this.divMain.addEventListener("mouseleave", e => {
                 this.dragEnd(e);
             });
-            /*this.divBarL.addEventListener("mousedown", e => {
-              const x = e.clientX;
-              this.setTranslate(x - this.handleOffset);
+            this.divBarL.addEventListener("mousedown", e => {
+                const x = e.clientX;
+                this.translate2(x);
             });
             this.divBarR.addEventListener("mousedown", e => {
-              const x = e.clientX;
-              this.setTranslate(x - this.handleOffset);
-            });*/
+                const x = e.clientX;
+                this.translate2(x);
+            });
             this.divHandle.addEventListener("touchstart", e => {
                 const x = e.touches[0].clientX;
                 this.dragStart(x);
@@ -72,7 +72,7 @@ var SimpleSlider = (function (exports) {
                 e.preventDefault();
                 this.currentX = x - this.initialX;
                 this.translate2(this.currentX);
-                this.value = this.getPositionValue(this.handlePos);
+                this.value = this.getPositionValue();
                 this.dispatchEvent(new CustomEvent("update"));
             }
         }
@@ -84,7 +84,7 @@ var SimpleSlider = (function (exports) {
         translate2(xPos) {
             this.translate(xPos);
             if (this.valueN > 0) {
-                let val = this.getPositionValue(xPos);
+                let val = this.getPositionValue();
                 const step = (this.valueMax - this.valueMin) / this.valueN;
                 val = Math.round(val / step) * step;
                 this.setPositionValue(val);
@@ -114,7 +114,7 @@ var SimpleSlider = (function (exports) {
                 //  (this.sliderWidth - handlePos).toString() + "px";
             }
         }
-        getPositionValue(xPos) {
+        getPositionValue() {
             //const step = this.sliderWidth / 10;
             //const step = 1;
             //this.handlePos = Math.round(this.handlePos / step) * step;
@@ -127,7 +127,7 @@ var SimpleSlider = (function (exports) {
             //const handlePos = newPos - this.handleOffset;
             //const barPos = newPos;
             this.translate(newPos);
-            this.value = this.getPositionValue(this.handlePos);
+            this.value = this.getPositionValue();
             this.dispatchEvent(new CustomEvent("update"));
         }
         init() {

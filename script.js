@@ -2,7 +2,7 @@
   const pValue = document.getElementById("value");
   const pValueFinal = document.getElementById("value-final");
 
-  const slider = new SimpleSlider.SimpleSlider("slider", 0, 100, 10);
+  const slider = new SimpleSlider.SimpleSlider("slider", 0, 100, 0);
 
   slider.addEventListener("update", e => {
     pValue.innerHTML = slider.value.toPrecision(4) + "%";
