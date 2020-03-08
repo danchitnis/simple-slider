@@ -41,7 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:6.8.0"],
             ["eslint-config-prettier", "virtual:c9db78a923a0924c9e65c542d5c67ecffa6d9bb36cbc07560f14ca5c1a7401354e3d18f00fff6db3031299159b7847a20365e868a0350b601b24181f347d05d8#npm:6.10.0"],
             ["prettier", "npm:1.19.1"],
-            ["rollup", "npm:1.32.0"],
+            ["rollup", "npm:1.32.1"],
             ["typescript", "patch:typescript@npm%3A3.8.3#builtin<compat/typescript>::version=3.8.3&hash=273569"]
           ],
           "linkType": "SOFT",
@@ -80,7 +80,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:6.8.0"],
             ["eslint-config-prettier", "virtual:c9db78a923a0924c9e65c542d5c67ecffa6d9bb36cbc07560f14ca5c1a7401354e3d18f00fff6db3031299159b7847a20365e868a0350b601b24181f347d05d8#npm:6.10.0"],
             ["prettier", "npm:1.19.1"],
-            ["rollup", "npm:1.32.0"],
+            ["rollup", "npm:1.32.1"],
             ["typescript", "patch:typescript@npm%3A3.8.3#builtin<compat/typescript>::version=3.8.3&hash=273569"]
           ],
           "linkType": "SOFT",
@@ -132,10 +132,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@types/node", [
-        ["npm:13.7.7", {
-          "packageLocation": "./.yarn/cache/@types-node-npm-13.7.7-c8720ca4bc-2.zip/node_modules/@types/node/",
+        ["npm:13.9.0", {
+          "packageLocation": "./.yarn/cache/@types-node-npm-13.9.0-a623733bf2-2.zip/node_modules/@types/node/",
           "packageDependencies": [
-            ["@types/node", "npm:13.7.7"]
+            ["@types/node", "npm:13.9.0"]
           ],
           "linkType": "HARD",
         }]
@@ -1343,12 +1343,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["rollup", [
-        ["npm:1.32.0", {
-          "packageLocation": "./.yarn/cache/rollup-npm-1.32.0-479ec49914-2.zip/node_modules/rollup/",
+        ["npm:1.32.1", {
+          "packageLocation": "./.yarn/cache/rollup-npm-1.32.1-2b298fe87b-2.zip/node_modules/rollup/",
           "packageDependencies": [
-            ["rollup", "npm:1.32.0"],
+            ["rollup", "npm:1.32.1"],
             ["@types/estree", "npm:0.0.42"],
-            ["@types/node", "npm:13.7.7"],
+            ["@types/node", "npm:13.9.0"],
             ["acorn", "npm:7.1.1"]
           ],
           "linkType": "HARD",

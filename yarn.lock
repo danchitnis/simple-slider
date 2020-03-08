@@ -75,9 +75,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 13.7.7
-  resolution: "@types/node@npm:13.7.7"
-  checksum: 2/7a4a7c5060f86b6f4010d10b0de9831f98f303513a7403e8bfb3ad3f1d6a9533d023e1b6e2331959525156b84c0daf98ad1569407309da1f798498301f227a37
+  version: 13.9.0
+  resolution: "@types/node@npm:13.9.0"
+  checksum: 2/54c040abe4765c9be0e50e0aa5f9fb7d7bff67e1ff98d2c2587df14239a965e6543be2c3321ed81a946d400b9ec47d4f8304648f6eb6c0617a523697e8cb2d20
   languageName: node
   linkType: hard
 
@@ -1127,15 +1127,15 @@ __metadata:
   linkType: hard
 
 "rollup@npm:^1.31.1":
-  version: 1.32.0
-  resolution: "rollup@npm:1.32.0"
+  version: 1.32.1
+  resolution: "rollup@npm:1.32.1"
   dependencies:
     "@types/estree": "*"
     "@types/node": "*"
     acorn: ^7.1.0
   bin:
     rollup: dist/bin/rollup
-  checksum: 2/dea847f6d64867271c05b4664e86728a8ff82e5c2b67273153a73724fd31ced986363aecf806a4df305f19e4b20603bba45bd74b1be688d00429318cf297bf93
+  checksum: 2/fc59b8af482e0729fd720a6be1221f477ae1848fd88b0474d10f805567aa4ad5f16afa9a976c8fd30fd196fcb689b252826cdd138e7a4ad88462547adb5dbf40
   languageName: node
   linkType: hard
 
