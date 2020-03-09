@@ -1,6 +1,6 @@
 # simple-slider
 
-A simple slider based on vanilla HTML, CSS and JS with no dependencies.
+A simple range slider based on vanilla HTML, CSS and JS with no dependencies.
 
 # Example
 
@@ -35,3 +35,7 @@ window.addEventListener("resize", () => {
 # API documentation
 
 [See here 🧾](https://danchitnis.github.io/simple-slider/docs)
+
+# Contributions
+
+inspired by [noUiSlider](https://github.com/leongersen/noUiSlider/)
