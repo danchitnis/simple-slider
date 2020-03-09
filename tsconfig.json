@@ -12,5 +12,9 @@
       "*": ["node_modules/*"]
     }
   },
-  "include": ["src/**/*"]
+  "typedocOptions": {
+    "mode": "file",
+    "out": "docs",
+    "excludePrivate": "true"
+  }
 }

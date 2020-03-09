@@ -31,3 +31,7 @@ window.addEventListener("resize", () => {
 [CodePen Example](https://codepen.io/danchitnis/pen/ZEGYdav)
 
 [![Edit Simple Slider](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/simple-slider-bl267?fontsize=14&hidenavigation=1&theme=dark)
+
+# API documentation
+
+[See here 🧾](https://danchitnis.github.io/simple-slider/docs)

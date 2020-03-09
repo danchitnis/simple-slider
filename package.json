@@ -1,10 +1,11 @@
 {
   "name": "@danchitnis/simple-slider",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "A simple cross-platform slider",
   "main": "./dist/slider.js",
   "typings": "./dist/slider.d.ts",
   "scripts": {
+    "doc": "typedoc",
     "build": "tsc && rollup -c"
   },
   "repository": {
@@ -30,6 +31,7 @@
     "eslint-config-prettier": "^6.10.0",
     "prettier": "^1.19.1",
     "rollup": "^1.31.1",
+    "typedoc": "^0.16.11",
     "typescript": "^3.8.2"
   }
 }

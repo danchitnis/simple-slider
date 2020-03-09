@@ -17,11 +17,39 @@ export declare class SimpleSlider extends EventTarget {
     private active;
     private currentX;
     private initialX;
-    value: number;
-    valueMax: number;
-    valueMin: number;
-    valueN: number;
     private handlePos;
+    /**
+     * Current value of the slider
+     * @default half of the value range
+     */
+    value: number;
+    /**
+     * maximum value
+     * @default 100
+     */
+    valueMax: number;
+    /**
+     * minimum value for the slider
+     * @default 0
+     */
+    valueMin: number;
+    /**
+     * number of divisions in the value range
+     * @default 0
+     */
+    valueN: number;
+    /**
+     *
+     * @param div - The id of the div which the slider is going to be placed
+     * @param min - The minimum value for the slider
+     * @param max - The maximum value for the slider
+     * @param n - number of divisions within the value range, 0 for continuos
+     *
+     * @example
+     * ```javascript
+     * slider = new SimpleSlider("slider", 0, 100, 0);
+     * ```
+     */
     constructor(div: string, min: number, max: number, n: number);
     private dragStart;
     private drag;
@@ -29,10 +57,29 @@ export declare class SimpleSlider extends EventTarget {
     private translate2;
     private translate;
     private getPositionValue;
-    setPositionValue(val: number): void;
+    /**
+     * Sets the value of the slider on demand
+     * @param val - the value of the slider
+     */
+    setValue(val: number): void;
     private init;
     private handleToCentre;
+    /**
+     * Resize the slider
+     *
+     * @example
+     * ```javascript
+     *  window.addEventListener("resize", () => {
+     *    slider.resize();
+     *  });
+     * ```
+     */
     resize(): void;
+    /**
+     *
+     * @param eventName
+     * @param listener
+     */
     addEventListener(eventName: eventType, listener: EventListener): void;
     private makeDivs;
 }

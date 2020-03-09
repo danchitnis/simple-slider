@@ -8,3 +8,5 @@ style.css
 .yarn
 .pnp.js
 .yarnrc.yml
+docs
+.eslintrc.js
