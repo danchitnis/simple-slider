@@ -33,8 +33,5 @@
     "rollup": "^2.0.6",
     "typedoc": "^0.17.0",
     "typescript": "^3.8.3"
-  },
-  "dependencies": {
-    "event-target-shim": "^5.0.1"
   }
 }
