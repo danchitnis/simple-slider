@@ -192,6 +192,10 @@ var SimpleSlider = (function (exports) {
             this.init();
             this.setValue(this.value);
         }
+        /**
+         * Sets the status of the debug mode
+         * @param en - enable value true/false
+         */
         setDebug(en) {
             if (en) {
                 this.divHandle.style.zIndex = "0";

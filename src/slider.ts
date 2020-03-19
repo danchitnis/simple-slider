@@ -241,6 +241,10 @@ export class SimpleSlider extends EventTarget {
     this.setValue(this.value);
   }
 
+  /**
+   * Sets the status of the debug mode
+   * @param en - enable value true/false
+   */
   public setDebug(en: boolean): void {
     if (en) {
       this.divHandle.style.zIndex = "0";
