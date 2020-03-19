@@ -46,4 +46,13 @@
       e.setValue(val);
     });
   });
+
+  let debug = false;
+  const btDebug = document.getElementById("btDebug");
+  btDebug.addEventListener("click", () => {
+    slider.forEach(e => {
+      e.setDebug(~debug);
+    });
+    debug = ~debug;
+  });
 }

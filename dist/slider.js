@@ -189,6 +189,16 @@ export class SimpleSlider extends EventTarget {
         this.init();
         this.setValue(this.value);
     }
+    setDebug(en) {
+        if (en) {
+            this.divHandle.style.zIndex = "0";
+            this.divMain.style.border = "solid red 1px";
+        }
+        else {
+            this.divHandle.style.zIndex = "2";
+            this.divMain.style.border = "none";
+        }
+    }
     /**
      *
      * @param eventName

@@ -75,6 +75,7 @@ export declare class SimpleSlider extends EventTarget {
      * ```
      */
     resize(): void;
+    setDebug(en: boolean): void;
     /**
      *
      * @param eventName
