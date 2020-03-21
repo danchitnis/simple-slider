@@ -30,8 +30,8 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "prettier": "^1.19.1",
-    "rollup": "^2.0.6",
-    "typedoc": "^0.17.0",
+    "rollup": "^2.1.0",
+    "typedoc": "^0.17.1",
     "typescript": "^3.8.3"
   }
 }

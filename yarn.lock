@@ -34,8 +34,8 @@ __metadata:
     eslint: ^6.8.0
     eslint-config-prettier: ^6.10.0
     prettier: ^1.19.1
-    rollup: ^2.0.6
-    typedoc: ^0.17.0
+    rollup: ^2.1.0
+    typedoc: ^0.17.1
     typescript: ^3.8.3
   languageName: unknown
   linkType: soft
@@ -984,7 +984,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"handlebars@npm:^4.7.2":
+"handlebars@npm:^4.7.3":
   version: 4.7.3
   resolution: "handlebars@npm:4.7.3"
   dependencies:
@@ -1046,7 +1046,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"highlight.js@npm:^9.17.1":
+"highlight.js@npm:^9.18.1":
   version: 9.18.1
   resolution: "highlight.js@npm:9.18.1"
   checksum: 2/3fe99105e4cda17ae8dac7b49b791065b9b8306c1de40955cd59ce1a2cd2bed2683135a26f9ffd8f872a1d6e9d77935c48ffbb2557c228e647fe940a3bbbc4f2
@@ -1795,9 +1795,9 @@ resolve@^1.1.6:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.0.6":
-  version: 2.0.6
-  resolution: "rollup@npm:2.0.6"
+"rollup@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "rollup@npm:2.1.0"
   dependencies:
     fsevents: ~2.1.2
   dependenciesMeta:
@@ -1805,7 +1805,7 @@ resolve@^1.1.6:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: 2/3675a35977b048a708f10c1c11735b1753859a8a3ea68dd1dd30fe47e510033fc6a0d66455780f5e4ef9aeb18137caa141e512f13d13930136f18c8b3f3aec28
+  checksum: 2/8febb49ec6395ac22acf6a1b260dcc7eca2a3ff883488d3d00306eead99b46c81f2d5a1de6c4ebb3da90ef76d4f285f39025d88934edb747605e8f09fd54f063
   languageName: node
   linkType: hard
 
@@ -2178,13 +2178,13 @@ resolve@^1.1.6:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.17.0":
-  version: 0.17.0
-  resolution: "typedoc@npm:0.17.0"
+"typedoc@npm:^0.17.1":
+  version: 0.17.1
+  resolution: "typedoc@npm:0.17.1"
   dependencies:
     fs-extra: ^8.1.0
-    handlebars: ^4.7.2
-    highlight.js: ^9.17.1
+    handlebars: ^4.7.3
+    highlight.js: ^9.18.1
     lodash: ^4.17.15
     marked: ^0.8.0
     minimatch: ^3.0.0
@@ -2195,7 +2195,7 @@ resolve@^1.1.6:
     typescript: ">=3.8.3"
   bin:
     typedoc: bin/typedoc
-  checksum: 2/2cf301bdcb0e20d396f30e1508b01c5c2818fd2e84758f45a92276de14d283feb66afe34632a1b3b008d4f6f750b5185947c9aa2e5fbd5b6f75d604c53ba6125
+  checksum: 2/f6d12519251649d6647a1ee69464f19013399852a827b37af0d869a8692c6e23e36bcb2778e74c8b535ea6cd2a797c3f745141ff3b9301dbf32d189931f9c166
   languageName: node
   linkType: hard
 

@@ -41,8 +41,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:6.8.0"],
             ["eslint-config-prettier", "virtual:c9db78a923a0924c9e65c542d5c67ecffa6d9bb36cbc07560f14ca5c1a7401354e3d18f00fff6db3031299159b7847a20365e868a0350b601b24181f347d05d8#npm:6.10.0"],
             ["prettier", "npm:1.19.1"],
-            ["rollup", "npm:2.0.6"],
-            ["typedoc", "virtual:c9db78a923a0924c9e65c542d5c67ecffa6d9bb36cbc07560f14ca5c1a7401354e3d18f00fff6db3031299159b7847a20365e868a0350b601b24181f347d05d8#npm:0.17.0"],
+            ["rollup", "npm:2.1.0"],
+            ["typedoc", "virtual:c9db78a923a0924c9e65c542d5c67ecffa6d9bb36cbc07560f14ca5c1a7401354e3d18f00fff6db3031299159b7847a20365e868a0350b601b24181f347d05d8#npm:0.17.1"],
             ["typescript", "patch:typescript@npm%3A3.8.3#builtin<compat/typescript>::version=3.8.3&hash=273569"]
           ],
           "linkType": "SOFT",
@@ -81,8 +81,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:6.8.0"],
             ["eslint-config-prettier", "virtual:c9db78a923a0924c9e65c542d5c67ecffa6d9bb36cbc07560f14ca5c1a7401354e3d18f00fff6db3031299159b7847a20365e868a0350b601b24181f347d05d8#npm:6.10.0"],
             ["prettier", "npm:1.19.1"],
-            ["rollup", "npm:2.0.6"],
-            ["typedoc", "virtual:c9db78a923a0924c9e65c542d5c67ecffa6d9bb36cbc07560f14ca5c1a7401354e3d18f00fff6db3031299159b7847a20365e868a0350b601b24181f347d05d8#npm:0.17.0"],
+            ["rollup", "npm:2.1.0"],
+            ["typedoc", "virtual:c9db78a923a0924c9e65c542d5c67ecffa6d9bb36cbc07560f14ca5c1a7401354e3d18f00fff6db3031299159b7847a20365e868a0350b601b24181f347d05d8#npm:0.17.1"],
             ["typescript", "patch:typescript@npm%3A3.8.3#builtin<compat/typescript>::version=3.8.3&hash=273569"]
           ],
           "linkType": "SOFT",
@@ -2090,10 +2090,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["rollup", [
-        ["npm:2.0.6", {
-          "packageLocation": "./.yarn/cache/rollup-npm-2.0.6-edb756f7ef-2.zip/node_modules/rollup/",
+        ["npm:2.1.0", {
+          "packageLocation": "./.yarn/cache/rollup-npm-2.1.0-cdf8f137ea-2.zip/node_modules/rollup/",
           "packageDependencies": [
-            ["rollup", "npm:2.0.6"],
+            ["rollup", "npm:2.1.0"],
             ["fsevents", "patch:fsevents@npm%3A2.1.2#builtin<compat/fsevents>::version=2.1.2&hash=77dfe6"]
           ],
           "linkType": "HARD",
@@ -2501,10 +2501,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["typedoc", [
-        ["virtual:c9db78a923a0924c9e65c542d5c67ecffa6d9bb36cbc07560f14ca5c1a7401354e3d18f00fff6db3031299159b7847a20365e868a0350b601b24181f347d05d8#npm:0.17.0", {
-          "packageLocation": "./.yarn/$$virtual/typedoc-virtual-2289cc948f/0/cache/typedoc-npm-0.17.0-d743b84eea-2.zip/node_modules/typedoc/",
+        ["virtual:c9db78a923a0924c9e65c542d5c67ecffa6d9bb36cbc07560f14ca5c1a7401354e3d18f00fff6db3031299159b7847a20365e868a0350b601b24181f347d05d8#npm:0.17.1", {
+          "packageLocation": "./.yarn/$$virtual/typedoc-virtual-6009dc1319/0/cache/typedoc-npm-0.17.1-e31b84cb6f-2.zip/node_modules/typedoc/",
           "packageDependencies": [
-            ["typedoc", "virtual:c9db78a923a0924c9e65c542d5c67ecffa6d9bb36cbc07560f14ca5c1a7401354e3d18f00fff6db3031299159b7847a20365e868a0350b601b24181f347d05d8#npm:0.17.0"],
+            ["typedoc", "virtual:c9db78a923a0924c9e65c542d5c67ecffa6d9bb36cbc07560f14ca5c1a7401354e3d18f00fff6db3031299159b7847a20365e868a0350b601b24181f347d05d8#npm:0.17.1"],
             ["fs-extra", "npm:8.1.0"],
             ["handlebars", "npm:4.7.3"],
             ["highlight.js", "npm:9.18.1"],
