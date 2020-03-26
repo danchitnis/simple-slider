@@ -67,7 +67,15 @@
 				<a href="#simple-slider" id="simple-slider" style="color: inherit; text-decoration: none;">
 					<h1>simple-slider</h1>
 				</a>
-				<p>A simple range slider based on vanilla HTML, CSS and JS with no dependencies.</p>
+				<p>A simple range slider based on vanilla HTML, CSS and JS with no dependencies. Features include:</p>
+				<ul>
+					<li>Cross-browser compatibility using vanilla Javascript and CSS</li>
+					<li>Simple constructor and developer friendly</li>
+					<li>Single file library with no dependency, written in Typescript and compatible with ES6</li>
+					<li>Can be bundled with modern tools such as <a href="https://rollupjs.org/">RollupJS</a></li>
+					<li>Touch enabled for touchscreen devices</li>
+					<li>Responsive to real-time layout change</li>
+				</ul>
 				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
 					<h1>Example</h1>
 				</a>
@@ -84,6 +92,12 @@
 				<p><a href="https://jsfiddle.net/danchitnis/pfevzy3h">JSfiddle Example</a></p>
 				<p><a href="https://codepen.io/danchitnis/pen/ZEGYdav">CodePen Example</a></p>
 				<p><a href="https://codesandbox.io/s/simple-slider-bl267?fontsize=14&amp;hidenavigation=1&amp;theme=dark"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit Simple Slider"></a></p>
+				<a href="#webkit-ie-safari-amp-iphone" id="webkit-ie-safari-amp-iphone" style="color: inherit; text-decoration: none;">
+					<h1>Webkit (i.e. Safari &amp; iPhone)</h1>
+				</a>
+				<p>Add the following polyfill before your script to have support for Webkit. This also includes Chrome on iPhone since it is based on Webkit.</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://unpkg.com/@ungap/event-target"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+				<p>This <a href="https://github.com/ungap/event-target">package</a> will automatically detect if Event-Target is present in the browser.</p>
 				<a href="#api-documentation" id="api-documentation" style="color: inherit; text-decoration: none;">
 					<h1>API documentation</h1>
 				</a>

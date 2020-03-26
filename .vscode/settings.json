@@ -1,16 +1,9 @@
 {
   "eslint.packageManager": "yarn",
-  "eslint.validate": [
-    "vue",
-    "html",
-    "javascript",
-    "typescript",
-    "javascriptreact",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "typescript", "javascriptreact", "typescriptreact"],
   "eslint.enable": true,
   "eslint.nodePath": ".vscode/pnpify",
   "typescript.tsdk": ".vscode/pnpify/typescript/lib",
   "prettier.prettierPath": ".vscode/pnpify/prettier/index.js",
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": true
 }
