@@ -25,6 +25,8 @@ export class SimpleSlider extends EventTarget {
 
   private handlePos = 0;
 
+  private enable = true;
+
   /**
    * Current value of the slider
    * @default half of the value range
@@ -71,11 +73,13 @@ export class SimpleSlider extends EventTarget {
     this.init();
     this.handleToCentre();
 
-    this.divHandle.addEventListener("mousedown", e => {
+    this.divHandle.addEventListener("mousedown", (e) => {
       const x = e.clientX;
-      this.dragStart(x);
+      if (this.enable) {
+        this.dragStart(x);
+      }
     });
-    this.divMain.addEventListener("mousemove", e => {
+    this.divMain.addEventListener("mousemove", (e) => {
       const x = e.clientX;
       this.drag(e, x);
     });
@@ -86,20 +90,25 @@ export class SimpleSlider extends EventTarget {
       this.dragEnd();
     });
 
-    this.divBarL.addEventListener("mousedown", e => {
-      const x = e.clientX;
-      this.translate2(x);
-    });
-    this.divBarR.addEventListener("mousedown", e => {
-      const x = e.clientX;
-      this.translate2(x);
+    this.divBarL.addEventListener("mousedown", (e) => {
+      if (this.enable) {
+        const x = e.clientX;
+        this.translateN(x);
+      }
     });
 
-    this.divHandle.addEventListener("touchstart", e => {
+    this.divBarR.addEventListener("mousedown", (e) => {
+      if (this.enable) {
+        const x = e.clientX;
+        this.translateN(x);
+      }
+    });
+
+    this.divHandle.addEventListener("touchstart", (e) => {
       const x = e.touches[0].clientX;
       this.dragStart(x);
     });
-    this.divMain.addEventListener("touchmove", e => {
+    this.divMain.addEventListener("touchmove", (e) => {
       const x = e.touches[0].clientX;
       this.drag(e, x);
     });
@@ -121,7 +130,7 @@ export class SimpleSlider extends EventTarget {
       e.preventDefault();
 
       this.currentX = x - this.initialX;
-      this.translate2(this.currentX);
+      this.translateN(this.currentX);
       this.value = this.getPositionValue();
 
       this.dispatchEvent(new CustomEvent("update"));
@@ -135,7 +144,7 @@ export class SimpleSlider extends EventTarget {
 
   /*-----------------------------------------------------------*/
 
-  private translate2(xPos: number): void {
+  private translateN(xPos: number): void {
     this.translate(xPos);
     if (this.valueN > 0) {
       let val = this.getPositionValue();
@@ -158,11 +167,9 @@ export class SimpleSlider extends EventTarget {
         break;
       }
       default: {
-        this.divHandle.style.left =
-          (this.handlePos - this.handleOffset).toString() + "px";
+        this.divHandle.style.left = (this.handlePos - this.handleOffset).toString() + "px";
 
-        this.divBarL.style.width =
-          (this.handlePos - this.handleOffset).toString() + "px";
+        this.divBarL.style.width = (this.handlePos - this.handleOffset).toString() + "px";
       }
     }
   }
@@ -188,27 +195,21 @@ export class SimpleSlider extends EventTarget {
   }
 
   private init(): void {
-    const divMainWidth = parseFloat(
-      getComputedStyle(this.divMain).getPropertyValue("width")
-    );
-    const handleWidth = parseFloat(
-      getComputedStyle(this.divHandle).getPropertyValue("width")
-    );
+    const divMainWidth = parseFloat(getComputedStyle(this.divMain).getPropertyValue("width"));
+    const handleWidth = parseFloat(getComputedStyle(this.divHandle).getPropertyValue("width"));
     const handlePad = parseFloat(
       getComputedStyle(this.divHandle).getPropertyValue("border-left-width")
     );
     this.handleOffset = handleWidth / 2 + handlePad;
 
-    this.handlePos =
-      parseFloat(getComputedStyle(this.divHandle).left) + this.handleOffset;
+    this.handlePos = parseFloat(getComputedStyle(this.divHandle).left) + this.handleOffset;
 
     this.divBarL.style.left = this.handleOffset.toString() + "px";
     this.divBarR.style.left = this.handleOffset.toString() + "px";
 
     this.sliderWidth = divMainWidth - 2 * this.handleOffset;
 
-    this.divBarL.style.width =
-      (this.handlePos - this.handleOffset).toString() + "px";
+    this.divBarL.style.width = (this.handlePos - this.handleOffset).toString() + "px";
     this.divBarR.style.width = this.sliderWidth.toString() + "px";
 
     this.pxMin = this.handleOffset;
@@ -239,6 +240,23 @@ export class SimpleSlider extends EventTarget {
   public resize(): void {
     this.init();
     this.setValue(this.value);
+  }
+
+  /**
+   * Change the state of the slider
+   * @param state enable state of the slider
+   */
+  public setEnable(state: boolean): void {
+    this.enable = state;
+    if (this.enable) {
+      this.divHandle.style.backgroundColor = "darkslategrey";
+      this.divBarL.style.backgroundColor = "lightskyblue";
+      this.divBarR.style.backgroundColor = "lightgray";
+    } else {
+      this.divHandle.style.backgroundColor = "lightgray";
+      this.divBarL.style.backgroundColor = "gray";
+      this.divBarR.style.backgroundColor = "gray";
+    }
   }
 
   /**

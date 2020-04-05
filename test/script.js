@@ -10,13 +10,13 @@
 
   slider[2] = new SimpleSlider.SimpleSlider("slider3", 1, 10, 10);
 
-  slider.forEach(e => {
+  slider.forEach((e) => {
     e.addEventListener("update", () => {
       pValue.innerHTML = e.value.toPrecision(4);
     });
   });
 
-  slider.forEach(e => {
+  slider.forEach((e) => {
     e.addEventListener("drag-end", () => {
       pValueFinal.innerHTML = e.value.toPrecision(4);
     });
@@ -31,7 +31,7 @@
   });*/
 
   window.addEventListener("resize", () => {
-    slider.forEach(e => {
+    slider.forEach((e) => {
       e.resize();
     });
   });
@@ -42,7 +42,7 @@
   btSet.addEventListener("click", () => {
     const val = parseFloat(inputText.value);
 
-    slider.forEach(e => {
+    slider.forEach((e) => {
       e.setValue(val);
     });
   });
@@ -50,9 +50,19 @@
   let debug = false;
   const btDebug = document.getElementById("btDebug");
   btDebug.addEventListener("click", () => {
-    slider.forEach(e => {
-      e.setDebug(~debug);
+    slider.forEach((e) => {
+      e.setDebug(!debug);
     });
-    debug = ~debug;
+    debug = !debug;
+  });
+
+  let enable = true;
+  const btEnable = document.getElementById("btEnable");
+  btEnable.addEventListener("click", () => {
+    slider.forEach((e) => {
+      e.setEnable(!enable);
+      console.log(enable);
+    });
+    enable = !enable;
   });
 }

@@ -18,6 +18,7 @@ export declare class SimpleSlider extends EventTarget {
     private currentX;
     private initialX;
     private handlePos;
+    private enable;
     /**
      * Current value of the slider
      * @default half of the value range
@@ -54,7 +55,7 @@ export declare class SimpleSlider extends EventTarget {
     private dragStart;
     private drag;
     private dragEnd;
-    private translate2;
+    private translateN;
     private translate;
     private getPositionValue;
     /**
@@ -75,6 +76,7 @@ export declare class SimpleSlider extends EventTarget {
      * ```
      */
     resize(): void;
+    setEnable(state: boolean): void;
     /**
      * Sets the status of the debug mode
      * @param en - enable value true/false
