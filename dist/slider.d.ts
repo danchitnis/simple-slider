@@ -76,6 +76,10 @@ export declare class SimpleSlider extends EventTarget {
      * ```
      */
     resize(): void;
+    /**
+     * Change the state of the slider
+     * @param state enable state of the slider
+     */
     setEnable(state: boolean): void;
     /**
      * Sets the status of the debug mode

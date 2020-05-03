@@ -195,6 +195,10 @@ var SimpleSlider = (function (exports) {
             this.init();
             this.setValue(this.value);
         }
+        /**
+         * Change the state of the slider
+         * @param state enable state of the slider
+         */
         setEnable(state) {
             this.enable = state;
             if (this.enable) {
