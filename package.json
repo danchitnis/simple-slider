@@ -24,14 +24,14 @@
   },
   "homepage": "https://github.com/danchitnis/simple-slider#readme",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.31.0",
-    "@typescript-eslint/parser": "^2.31.0",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
     "@yarnpkg/pnpify": "^2.0.0-rc.22",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
     "prettier": "^2.0.5",
-    "rollup": "^2.8.2",
-    "typedoc": "^0.17.6",
-    "typescript": "^3.8.3"
+    "rollup": "^2.10.2",
+    "typedoc": "^0.17.7",
+    "typescript": "^3.9.2"
   }
 }
