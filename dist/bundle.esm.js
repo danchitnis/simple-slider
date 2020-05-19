@@ -4,7 +4,7 @@
  * by Danial Chitnis
  * Feb 2020
  */
-export class SimpleSlider extends EventTarget {
+class SimpleSlider extends EventTarget {
     /**
      *
      * @param div - The id of the div which the slider is going to be placed
@@ -248,4 +248,5 @@ export class SimpleSlider extends EventTarget {
         this.divMain.append(this.divBarR);
     }
 }
-//# sourceMappingURL=slider.js.map
+
+export { SimpleSlider };

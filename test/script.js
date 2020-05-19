@@ -1,14 +1,16 @@
+import { SimpleSlider } from "/dist/bundle.esm.js";
+
 {
   const pValue = document.getElementById("value");
   const pValueFinal = document.getElementById("value-final");
 
   const slider = [];
 
-  slider[0] = new SimpleSlider.SimpleSlider("slider1", 0, 100, 0);
+  slider[0] = new SimpleSlider("slider1", 0, 100, 0);
 
-  slider[1] = new SimpleSlider.SimpleSlider("slider2", 0, 100, 10);
+  slider[1] = new SimpleSlider("slider2", 0, 100, 10);
 
-  slider[2] = new SimpleSlider.SimpleSlider("slider3", 1, 10, 10);
+  slider[2] = new SimpleSlider("slider3", 1, 10, 10);
 
   slider.forEach((e) => {
     e.addEventListener("update", () => {
