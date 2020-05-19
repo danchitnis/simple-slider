@@ -1,4 +1,4 @@
-import { SimpleSlider } from "/dist/bundle.esm.js";
+import { SimpleSlider } from "../dist/bundle.esm.js";
 
 {
   const pValue = document.getElementById("value");
