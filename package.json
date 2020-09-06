@@ -1,12 +1,13 @@
 {
   "name": "@danchitnis/simple-slider",
-  "version": "0.1.4",
+  "version": "0.1.8",
   "description": "A simple cross-platform slider",
   "main": "./dist/bundle.umd.js",
   "module": "./dist/bundle.esm.js",
   "typings": "./dist/slider.d.ts",
   "scripts": {
     "doc": "typedoc",
+    "tsc": "tsc",
     "build": "rollup -c"
   },
   "repository": {
@@ -25,15 +26,15 @@
   },
   "homepage": "https://github.com/danchitnis/simple-slider#readme",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^3.10.1",
-    "@typescript-eslint/parser": "^3.10.1",
-    "@yarnpkg/pnpify": "^2.2.0",
-    "eslint": "^7.7.0",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "@yarnpkg/pnpify": "^2.2.1",
+    "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
     "prettier": "^2.1.1",
-    "rollup": "^2.26.8",
+    "rollup": "^2.26.10",
     "rollup-plugin-typescript2": "^0.27.2",
-    "typedoc": "^0.19.0",
+    "typedoc": "^0.19.1",
     "typescript": "^4.0.2"
   }
 }

@@ -10,7 +10,7 @@ import { SimpleSlider } from "../dist/bundle.esm.js";
 
   slider[1] = new SimpleSlider("slider2", 0, 100, 10);
 
-  slider[2] = new SimpleSlider("slider3", 1, 10, 10);
+  slider[2] = new SimpleSlider("slider3", 0, 12, 13);
 
   slider.forEach((e) => {
     e.addEventListener("update", () => {

@@ -74,7 +74,9 @@
               this.dragEnd();
           });
           this.divMain.addEventListener("mouseleave", () => {
-              this.dragEnd();
+              if (this.active) {
+                  this.dragEnd();
+              }
           });
           this.divBarL.addEventListener("mousedown", (e) => {
               if (this.enable) {

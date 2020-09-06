@@ -1,3 +1,10 @@
 node_modules
+.pnp.js
+.yarn.lock
+.eslintrc.js
+test
+docs
+.vscode
+.github
 .yarn
 .yarnrc.yml
