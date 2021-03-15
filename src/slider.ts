@@ -5,9 +5,7 @@
  * Feb 2020
  */
 
-type eventType = "drag-start" | "update" | "drag-end" | "resize";
-
-export class SimpleSlider extends EventTarget {
+export class SimpleSlider {
   private divMain: HTMLDivElement;
   private divHandle: HTMLDivElement;
 
@@ -64,7 +62,6 @@ export class SimpleSlider extends EventTarget {
    * ```
    */
   constructor(div: string, min: number, max: number, n: number) {
-    super();
     this.valueMax = max;
     this.valueMin = min;
     this.valueN = n;
@@ -124,7 +121,7 @@ export class SimpleSlider extends EventTarget {
 
     this.active = true;
 
-    this.dispatchEvent(new CustomEvent("drag-start"));
+    this.callbackDragStart();
   }
 
   private drag(e: Event, x: number): void {
@@ -135,13 +132,13 @@ export class SimpleSlider extends EventTarget {
       this.translateN(this.currentX);
       this.value = this.getPositionValue();
 
-      this.dispatchEvent(new CustomEvent("update"));
+      this.callBackUpdate();
     }
   }
 
   private dragEnd(): void {
     this.active = false;
-    this.dispatchEvent(new CustomEvent("drag-end"));
+    this.callBackDragEnd();
   }
 
   /*-----------------------------------------------------------*/
@@ -193,7 +190,7 @@ export class SimpleSlider extends EventTarget {
 
     this.value = this.getPositionValue();
 
-    this.dispatchEvent(new CustomEvent("update"));
+    this.callBackUpdate();
   }
 
   private init(): void {
@@ -275,15 +272,6 @@ export class SimpleSlider extends EventTarget {
     }
   }
 
-  /**
-   *
-   * @param eventName
-   * @param listener
-   */
-  public addEventListener(eventName: eventType, listener: EventListener): void {
-    super.addEventListener(eventName, listener);
-  }
-
   private makeDivs(mainDiv: string): void {
     this.divMain = document.getElementById(mainDiv) as HTMLDivElement;
     this.divMain.className = "simple-slider";
@@ -304,4 +292,8 @@ export class SimpleSlider extends EventTarget {
     this.divMain.append(this.divBarL);
     this.divMain.append(this.divBarR);
   }
+
+  public callBackUpdate(): void {}
+  public callbackDragStart(): void {}
+  public callBackDragEnd(): void {}
 }

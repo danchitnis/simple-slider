@@ -8,29 +8,21 @@ import { SimpleSlider } from "../dist/bundle.esm.js";
 
   slider[0] = new SimpleSlider("slider1", 0, 100, 0);
 
-  slider[1] = new SimpleSlider("slider2", 0, 100, 10);
+  slider[1] = new SimpleSlider("slider2", 0, 100, 11);
 
   slider[2] = new SimpleSlider("slider3", 0, 12, 13);
 
   slider.forEach((e) => {
-    e.addEventListener("update", () => {
+    e.callBackUpdate = () => {
       pValue.innerHTML = e.value.toPrecision(4);
-    });
+    };
   });
 
   slider.forEach((e) => {
-    e.addEventListener("drag-end", () => {
+    e.callBackDragEnd = () => {
       pValueFinal.innerHTML = e.value.toPrecision(4);
-    });
+    };
   });
-
-  /*slider1.addEventListener("update", e => {
-    pValue.innerHTML = slider1.value.toPrecision(4) + "%";
-  });*/
-
-  /*slider1.addEventListener("drag-end", e => {
-    pValueFinal.innerHTML = slider1.value.toPrecision(4) + "%";
-  });*/
 
   window.addEventListener("resize", () => {
     slider.forEach((e) => {

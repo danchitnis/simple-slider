@@ -10,7 +10,7 @@
    * by Danial Chitnis
    * Feb 2020
    */
-  class SimpleSlider extends EventTarget {
+  class SimpleSlider {
       /**
        *
        * @param div - The id of the div which the slider is going to be placed
@@ -24,7 +24,6 @@
        * ```
        */
       constructor(div, min, max, n) {
-          super();
           this.sliderWidth = 0;
           this.handleOffset = 0;
           this.pxMin = 0;
@@ -105,7 +104,7 @@
       dragStart(x) {
           this.initialX = x - this.handlePos - this.handleOffset;
           this.active = true;
-          this.dispatchEvent(new CustomEvent("drag-start"));
+          this.callbackDragStart();
       }
       drag(e, x) {
           if (this.active) {
@@ -113,12 +112,12 @@
               this.currentX = x - this.initialX;
               this.translateN(this.currentX);
               this.value = this.getPositionValue();
-              this.dispatchEvent(new CustomEvent("update"));
+              this.callBackUpdate();
           }
       }
       dragEnd() {
           this.active = false;
-          this.dispatchEvent(new CustomEvent("drag-end"));
+          this.callBackDragEnd();
       }
       /*-----------------------------------------------------------*/
       translateN(xPos) {
@@ -160,7 +159,7 @@
           const newPos = valRel * this.sliderWidth + 2 * this.handleOffset;
           this.translate(newPos);
           this.value = this.getPositionValue();
-          this.dispatchEvent(new CustomEvent("update"));
+          this.callBackUpdate();
       }
       init() {
           const divMainWidth = parseFloat(getComputedStyle(this.divMain).getPropertyValue("width"));
@@ -231,14 +230,6 @@
               this.divMain.style.border = "none";
           }
       }
-      /**
-       *
-       * @param eventName
-       * @param listener
-       */
-      addEventListener(eventName, listener) {
-          super.addEventListener(eventName, listener);
-      }
       makeDivs(mainDiv) {
           this.divMain = document.getElementById(mainDiv);
           this.divMain.className = "simple-slider";
@@ -255,6 +246,9 @@
           this.divMain.append(this.divBarL);
           this.divMain.append(this.divBarR);
       }
+      callBackUpdate() { }
+      callbackDragStart() { }
+      callBackDragEnd() { }
   }
 
   exports.SimpleSlider = SimpleSlider;

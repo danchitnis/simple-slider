@@ -4,8 +4,7 @@
  * by Danial Chitnis
  * Feb 2020
  */
-declare type eventType = "drag-start" | "update" | "drag-end" | "resize";
-export declare class SimpleSlider extends EventTarget {
+export declare class SimpleSlider {
     private divMain;
     private divHandle;
     private sliderWidth;
@@ -86,13 +85,9 @@ export declare class SimpleSlider extends EventTarget {
      * @param en - enable value true/false
      */
     setDebug(en: boolean): void;
-    /**
-     *
-     * @param eventName
-     * @param listener
-     */
-    addEventListener(eventName: eventType, listener: EventListener): void;
     private makeDivs;
+    callBackUpdate(): void;
+    callbackDragStart(): void;
+    callBackDragEnd(): void;
 }
-export {};
 //# sourceMappingURL=slider.d.ts.map
