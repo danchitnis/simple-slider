@@ -17,12 +17,12 @@ Initialization
 const slider = new SimpleSlider("slider", 0, 100, 0);
 ```
 
-handle the update event
+handle the update callback
 
 ```javascript
-slider.addEventListener("update", e => {
-  pValue.innerHTML = slider.value.toString() + "%";
-});
+slider.callBackUpdate = () => {
+  pValue.innerHTML = slider.value.toPrecision(4) + "%";
+};
 ```
 
 Redraw the slider upon window resize
@@ -39,15 +39,23 @@ window.addEventListener("resize", () => {
 
 [![Edit Simple Slider](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/simple-slider-bl267?fontsize=14&hidenavigation=1&theme=dark)
 
-# Webkit (i.e. Safari & iPhone)
+# Install
 
-Add the following polyfill before your script to have support for Webkit. This also includes Chrome on iPhone since it is based on Webkit.
-
-```html
-<script src="https://unpkg.com/@ungap/event-target"></script>
+```shell
+npm install @danchitnis/simple-slider
 ```
 
-This [package](https://github.com/ungap/event-target) will automatically detect if Event-Target is present in the browser.
+or
+
+```shell
+yarn add @danchitnis/simple-slider
+```
+
+Skypack:
+
+```javascript
+import { SimpleSlider } from "https://cdn.skypack.dev/@danchitnis/simple-slider";
+```
 
 # API documentation
 
